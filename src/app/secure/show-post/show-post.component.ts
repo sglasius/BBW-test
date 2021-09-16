@@ -8,7 +8,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 })
 export class ShowPostComponent implements OnInit {
   public postForm:FormGroup;
-  postId: string = "";
+  postId: string;
+  private videoUrl = "//demo.bbvms.com/p/default/c/";
   constructor( private formBuilder: FormBuilder) {
     this.postForm = this.formBuilder.group({
       postId: ''
@@ -21,5 +22,16 @@ export class ShowPostComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  getPostById(postId:string) {
+
+  }
+
+       // Get video with id 
+    getVideoUrl(videoID: string): string {
+      const url = this.videoUrl + videoID + ".html?inheritDimensions=true";
+      return url;
+
+    }
 
 }
