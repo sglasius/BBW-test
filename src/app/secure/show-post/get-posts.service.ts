@@ -16,8 +16,8 @@ export class GetPostsService {
       private httpClient: HttpClient,
     ) {}
   
-    getPost(postID: string): Observable<RestResponseModel> {
-      const url = this.postUrl + postID + ".html?inheritDimensions=true";
+    getPost(postID: number): Observable<RestResponseModel> {
+      const url = this.postUrl + postID ;
       return this.httpClient.get(url, { observe: 'response' }).pipe(mergeMap((res: HttpResponse<any>) => {
         const response = new RestResponseModel();
         response.isError = false;
