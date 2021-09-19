@@ -1,8 +1,8 @@
 <div class="form-container">
-    <form [formGroup]="postForm">
+  <form [formGroup]="postForm">
     <mat-form-field class="input-post-id" appearance="fill">
-        <mat-label>Post Id (number)</mat-label>
-        <input matInput type="text" id="postId" name="postId" formControlName="postId">
+      <mat-label>Post Id (number)</mat-label>
+      <input matInput type="text" id="postId" name="postId" formControlName="postId">
     </mat-form-field>
     <button id="myBtn" mat-stroked-button type="button" (click)="clickme()">Search</button>
     <h1 *ngIf="!this.isNumber">Not a valid number</h1>
@@ -11,12 +11,12 @@
     <p *ngIf="!this.showPlaceHolder">{{placeholderTitle}}</p>
     <h1 *ngIf="!this.showPlaceHolder">Body:</h1>
     <p *ngIf="!this.showPlaceHolder">{{placeholderBody}}</p>
-    </form>
-    <div class="videoWrapper">
-        <iframe *ngIf="this.safeSrc"
-      onload="this.src += '#!referrer='+encodeURIComponent(location.href)+'&realReferrer='+encodeURIComponent(document.referrer)"  
-      [src]="safeSrc" width="720" height="400"  
-      frameborder="0" webkitallowfullscreen mozallowFullscreen oallowFullscreen msallowFullscreen allowfullscreen >  
-        </iframe>
-      </div>
+  </form>
+  <div class="videoWrapper">
+    <iframe *ngIf="this.safeSrc"
+      onload="this.src += '#!referrer='+encodeURIComponent(location.href)+'&realReferrer='+encodeURIComponent(document.referrer)"
+      [src]="safeSrc" width="720" height="400" frameborder="0" webkitallowfullscreen mozallowFullscreen oallowFullscreen
+      msallowFullscreen allowfullscreen>
+    </iframe>
+  </div>
 </div>

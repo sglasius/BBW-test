@@ -11,6 +11,7 @@ import { MappingModel } from './models/mapping-model';
   templateUrl: './show-post.component.html',
   styleUrls: ['./show-post.component.scss']
 })
+
 export class ShowPostComponent implements OnInit {
   postIdToVideoIdList: Array<MappingModel> = [];
   public postForm: FormGroup;

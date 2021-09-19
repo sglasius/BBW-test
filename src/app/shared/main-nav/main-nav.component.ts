@@ -17,10 +17,10 @@ export class MainNavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) { }
 
   isButtonActive(path: string): boolean {
     return this.router.url.indexOf(path) !== -1;
-   }
- 
+  }
+
 }

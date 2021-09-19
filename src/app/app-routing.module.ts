@@ -4,9 +4,9 @@ import { ShowPostComponent } from './secure/show-post/show-post.component';
 import { LandingComponent } from './shared/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/landing', pathMatch: 'full'},
-  { path: 'landing', component: LandingComponent},
-  { path: 'showPosts', component: ShowPostComponent},
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingComponent },
+  { path: 'showPosts', component: ShowPostComponent },
 
 ];
 
