@@ -4,7 +4,7 @@
         <mat-label>Post Id (number)</mat-label>
         <input matInput type="text" id="postId" name="postId" formControlName="postId">
     </mat-form-field>
-    <button mat-stroked-button type="button" (click)="clickme()">Search</button>
+    <button id="myBtn" mat-stroked-button type="button" (click)="clickme()">Search</button>
     <h1 *ngIf="!this.isNumber">Not a valid number</h1>
     <h1 *ngIf="!this.isNumberValid">Not a valid ID in mapping.csv, best chance below 100</h1>
     <h1 *ngIf="!this.showPlaceHolder">Title:</h1>
@@ -12,4 +12,11 @@
     <h1 *ngIf="!this.showPlaceHolder">Body:</h1>
     <p *ngIf="!this.showPlaceHolder">{{placeholderBody}}</p>
     </form>
+    <div class="videoWrapper">
+        <iframe 
+      onload="this.src += '#!referrer='+encodeURIComponent(location.href)+'&realReferrer='+encodeURIComponent(document.referrer)"  
+      [src]="safeSrc" width="720" height="400"  
+      frameborder="0" webkitallowfullscreen mozallowFullscreen oallowFullscreen msallowFullscreen allowfullscreen >  
+        </iframe>
+      </div>
 </div>

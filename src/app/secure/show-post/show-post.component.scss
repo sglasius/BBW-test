@@ -1,9 +1,30 @@
 .input-post-id {
     width: 20%;
+    padding-right: 3%;
   }
+
+  #myBtn {
+    width: 200px;
+    border-radius: 20px;
+    font-size: 18px;
+    padding: 11px;
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    cursor: pointer;
+    transition: 1000ms ease;
+  }
+  
+  #myBtn:hover {
+    background: rgba(255,255,255, 0.5);
+    color: black;
+    transition: 1500ms ease;
+  } 
+
 .form-container {
+    margin-left: 5%;
+    margin-top: 3%;
     display: flex;
     flex-direction: column;
     background:transparent;
-
     }

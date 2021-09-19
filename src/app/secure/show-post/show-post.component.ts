@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { RestResponseModel } from 'src/app/shared/models/rest-response-model';
 import { GetPostsService } from "./get-posts.service";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-show-post',
@@ -23,9 +24,11 @@ export class ShowPostComponent implements OnInit {
   placeholderTitle: string;
   showPlaceHolder: boolean= true;
   placeholderBody: string;
+  safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl("//demo.bbvms.com/p/default/c/3798953.html?inheritDimensions=true");
 
   constructor(
     private getPostsService: GetPostsService,
+    private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private http: HttpClient) {
     this.postForm = this.formBuilder.group({
@@ -48,7 +51,7 @@ export class ShowPostComponent implements OnInit {
       this.isNumber = true;
 
       // vies
-      if (this.mappingCSV.includes(this.postId + ",")) {
+      if (this.mappingCSV.includes(this.postId + "," )) {
         console.log("JEEJ");
         this.isNumberValid = true
         this.showPlaceHolder = false;
