@@ -73,13 +73,11 @@ export class ShowPostComponent implements OnInit {
       .then(response => response.text())
       .then(data => {
         // Do something with your data
-        console.log(data);
         this.mappingCSV = data;
         var n = this.mappingCSV.split("\n");
         for (var x in n) {
           let customObj = new MappingModel();
           n[x] = n[x];
-          console.log("splitting" + n[x]);
           customObj.postId = Number(n[x].substr(0, n[x].indexOf(',')));
           customObj.videoId = Number(n[x].substr(n[x].lastIndexOf(',')).replace(/['"]+/g, '').replace(/[,]+/g, ''));
           this.postIdToVideoIdList.push(customObj);
@@ -88,7 +86,6 @@ export class ShowPostComponent implements OnInit {
   }
 
   getPostById(postId: number) {
-    console.log("PostID = " + postId);
     this.getPostsService.getPost(postId).subscribe((response: RestResponseModel) => {
       if (response.error) {
         console.log("Data could not be loaded " + response.error.reason);
