@@ -13,7 +13,7 @@
     <p *ngIf="!this.showPlaceHolder">{{placeholderBody}}</p>
     </form>
     <div class="videoWrapper">
-        <iframe 
+        <iframe *ngIf="this.safeSrc"
       onload="this.src += '#!referrer='+encodeURIComponent(location.href)+'&realReferrer='+encodeURIComponent(document.referrer)"  
       [src]="safeSrc" width="720" height="400"  
       frameborder="0" webkitallowfullscreen mozallowFullscreen oallowFullscreen msallowFullscreen allowfullscreen >  

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RestResponseModel } from 'src/app/shared/models/rest-response-model';
 import { GetPostsService } from "./get-posts.service";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MappingModel } from './models/mapping-model';
 
 @Component({
   selector: 'app-show-post',
@@ -11,7 +12,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./show-post.component.scss']
 })
 export class ShowPostComponent implements OnInit {
-
+  postIdToVideoIdList: Array<MappingModel> = [];
   public postForm: FormGroup;
   postId: number;
   private videoUrl = "//demo.bbvms.com/p/default/c/";
@@ -22,9 +23,9 @@ export class ShowPostComponent implements OnInit {
   mappingCSV: string;
   isNumberValid: boolean = true;
   placeholderTitle: string;
-  showPlaceHolder: boolean= true;
+  showPlaceHolder: boolean = true;
   placeholderBody: string;
-  safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl("//demo.bbvms.com/p/default/c/3798953.html?inheritDimensions=true");
+  safeSrc: SafeResourceUrl;
 
   constructor(
     private getPostsService: GetPostsService,
@@ -46,28 +47,25 @@ export class ShowPostComponent implements OnInit {
     this.showPlaceHolder = true;
     this.postId = this.postForm.get('postId')?.value;
     this.postForm.get('postId');
-    // if (typeof +this.postId === "number" && !isNaN(+this.postId)){
+    // check if postId is number and if it is in the mappinglist
     if (typeof +this.postId === "number" && !isNaN(+this.postId)) {
       this.isNumber = true;
-
-      // vies
-      if (this.mappingCSV.includes(this.postId + "," )) {
-        console.log("JEEJ");
+      if (this.postIdToVideoIdList.some(obj => obj.postId == this.postId)) {
         this.isNumberValid = true
         this.showPlaceHolder = false;
         this.getPostById(this.postId);
+        var index = this.postIdToVideoIdList.findIndex(obj => obj.postId == this.postId);
+        this.setSafeVideoUrl(this.postIdToVideoIdList[index].videoId);
       }
       else {
-        console.log("FAIL");
         this.isNumberValid = false
-
       }
     }
     else {
       this.isNumber = false
     }
   }
-  
+
   // Load mapping csv
   fetchData() {
     fetch('../../../assets/static/mapping.csv')
@@ -76,6 +74,15 @@ export class ShowPostComponent implements OnInit {
         // Do something with your data
         console.log(data);
         this.mappingCSV = data;
+        var n = this.mappingCSV.split("\n");
+        for (var x in n) {
+          let customObj = new MappingModel();
+          n[x] = n[x];
+          console.log("splitting" + n[x]);
+          customObj.postId = Number(n[x].substr(0, n[x].indexOf(',')));
+          customObj.videoId = Number(n[x].substr(n[x].lastIndexOf(',')).replace(/['"]+/g, '').replace(/[,]+/g, ''));
+          this.postIdToVideoIdList.push(customObj);
+        }
       });
   }
 
@@ -90,15 +97,13 @@ export class ShowPostComponent implements OnInit {
         this.placeholderBody = response.placeHolderPostModel.body;
       }
     });
-
   }
 
-  // Get video with id 
-  getVideoUrl(videoID: string): string {
+  // set video url with id and sanitize
+  setSafeVideoUrl(videoID: number) {
     this.id = Number(videoID);
     const url = this.videoUrl + videoID + ".html?inheritDimensions=true";
-    return url;
-
+    this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }

@@ -4,7 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { RestResponseModel } from '../../shared/models/rest-response-model';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { PlaceHolderPostModel } from './placeholder-post-model';
+import { PlaceHolderPostModel } from './models/placeholder-post-model';
 
 @Injectable({
   providedIn: 'root'
