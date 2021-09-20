@@ -81,6 +81,10 @@ export class ShowPostComponent implements OnInit {
           customObj.postId = Number(n[x].substr(0, n[x].indexOf(',')));
           customObj.videoId = Number(n[x].substr(n[x].lastIndexOf(',')).replace(/['"]+/g, '').replace(/[,]+/g, ''));
           this.postIdToVideoIdList.push(customObj);
+          // Sort in case I want a scroll down instead of input or something
+          this.postIdToVideoIdList.sort(function (a, b) {
+            return a.postId - b.postId;
+          });
         }
       });
   }
